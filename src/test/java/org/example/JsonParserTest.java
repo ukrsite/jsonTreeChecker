@@ -130,7 +130,7 @@ public class JsonParserTest
                 },
                 {
                         new String[]{JSON_SECOND, "title", ""},
-                        "3",
+                        "1",
                         ""
                 },
                 {
