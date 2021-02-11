@@ -51,12 +51,15 @@ public class Checker {
         JsonNode rootNode = null;
         try {
             rootNode = JsonParser.getExampleRoot(
-                    args != null && args.length != 0 || " ".equals(args) ? args[0] : JSON_FILE);
+                    args != null && args[0].equals("test") ? JSON_FILE :
+                    args != null && args.length != 0 && !args[0].equals("") ? args[0] :
+                    args != null && args[0].equals("") ? JSON_FILE : JSON_FILE);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
         String yaml = toYaml(rootNode);
-        System.out.println(yaml);
+//        System.out.println(yaml);
 
         return JsonParser.printResult(
                 yaml,
@@ -72,8 +75,8 @@ public class Checker {
         LOG.debug("");
         System.out.println(
                 "Input params in a following format \n"
-                 + "'src/test/java/resources/firstcase.json' first Tatu :\n"
-                 + "or press Enter");
+                 + "src/test/java/resources/firstcase.json first Tatu\n"
+                 + "or type test");
         final String[] list = scan.nextLine().split("\\s+");
         return list;
     }
