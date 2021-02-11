@@ -4,7 +4,7 @@ Test framework : TestNG
 Build framework : Maven
 
 Target:
-Implement and cover with unit tests console application which find recursivlly and output count of objects in a "given" json document:
+Implement and cover with functional tests console application which find recursivlly and output count of objects in a "given" json document:
 - which contains "specific field" only
 - which contains "specific field" and "specific value"
 
