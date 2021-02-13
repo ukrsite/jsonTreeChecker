@@ -35,7 +35,7 @@ public class Checker {
 
     public static void main(String[] args) {
 
-        if (args == null || args.length == 0) {
+        if (args.length == 0) {
             args = readNextLine(scan);
         }
         checkConditon(args);
@@ -52,14 +52,12 @@ public class Checker {
         try {
             rootNode = JsonParser.getExampleRoot(
                     args != null && args[0].equals("test") ? JSON_FILE :
-                    args != null && args.length != 0 && !args[0].equals("") ? args[0] :
-                    args != null && args[0].equals("") ? JSON_FILE : JSON_FILE);
-
+                    args != null && args.length != 0 && !args[0].equals("") ? args[0] : JSON_FILE);
         } catch (IOException e) {
             e.printStackTrace();
         }
         String yaml = toYaml(rootNode);
-//        System.out.println(yaml);
+        System.out.println(yaml);
 
         return JsonParser.printResult(
                 yaml,
@@ -77,8 +75,7 @@ public class Checker {
                 "Input params in a following format \n"
                  + "src/test/java/resources/firstcase.json first Tatu\n"
                  + "or type test");
-        final String[] list = scan.nextLine().split("\\s+");
-        return list;
+        return scan.nextLine().split("\\s+");
     }
 }
 

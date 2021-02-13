@@ -38,6 +38,7 @@ public class JsonParser {
      * @param jsonFile name of file
      */
     static JsonNode getExampleRoot(final String jsonFile) throws IOException {
+        LOG.debug("");
         String jsonString = readFileAsString(jsonFile);
         JsonNode rootNode = mapper.readTree(jsonString);
         return rootNode;
@@ -48,6 +49,7 @@ public class JsonParser {
      * @param root of json
      */
     public static String toYaml(JsonNode root) {
+        LOG.debug("");
         StringBuilder yaml = new StringBuilder();
         processNode(root, yaml, 0);
         return yaml.toString();
@@ -60,6 +62,7 @@ public class JsonParser {
      * @param depth of iterations
      */
     private static void processNode(JsonNode jsonNode, StringBuilder yaml, int depth) {
+        LOG.debug("");
         if (jsonNode.isValueNode()) {
             yaml.append(jsonNode.asText());
         } else if (jsonNode.isArray()) {
@@ -80,6 +83,7 @@ public class JsonParser {
      */
     private static void appendNodeToYaml(JsonNode node, StringBuilder yaml,
                                          int depth, boolean isArrayItem) {
+        LOG.debug("");
         Iterator<Entry<String, JsonNode>> fields = node.fields();
         boolean isFirst = true;
         while (fields.hasNext()) {
@@ -99,6 +103,7 @@ public class JsonParser {
      */
     private static void addFieldNameToYaml(
             StringBuilder yaml, String fieldName, int depth, boolean isFirstInArray) {
+        LOG.debug("");
         if (yaml.length() > 0) {
             yaml.append("\n");
         }
@@ -114,6 +119,7 @@ public class JsonParser {
      */
     public static Map<String, Integer> printResult(final String yaml,
                                           final String key, final String value) {
+        LOG.debug("");
         int keyCounter = 0;
         int valueCounter = 0;
         if (yaml == null && yaml.length() == 0) {
@@ -125,7 +131,7 @@ public class JsonParser {
         }
         while (scanner.hasNext()) {
             final String s = scanner.nextLine();
-            if (s.matches(format("%s:\\s.+", key))) {
+            if (s.contains(format("%s:", key))) {
                 keyCounter++;
             }
             if (s.equals(format("%s: %s", key, value))) {
@@ -146,15 +152,8 @@ public class JsonParser {
         return map;
     }
     public static String readFileAsString(final String fileName) throws IOException {
+        LOG.debug("");
         return new String(Files.readAllBytes(Paths.get(fileName)));
-    }
-    private static String[] readNextLine(final Scanner scan) {
-        System.out.println(
-                "Input params in a following format \n"
-                 + "'src/test/java/resources/firstcase.json' first Tatu :\n"
-                 + "or press Enter");
-        final String[] list = scan.nextLine().split("\\s+");
-        return list;
     }
 }
 
